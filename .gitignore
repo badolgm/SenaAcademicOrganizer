@@ -1,0 +1,13 @@
+# Ignorar scripts de creación de estructura
+crear_estructura_sena_ads.bat
+crear_estructura_sena_ads.ps1
+crear_estructura_sena_ads.sh
+
+# Ignorar archivos temporales
+*.log
+*.tmp
+
+# Ignorar configuraciones locales
+.vscode/
+.DS_Store
+Thumbs.db

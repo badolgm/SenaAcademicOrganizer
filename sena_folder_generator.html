@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador Académico SENA ADS - Ficha 3070388</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .structure-preview {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #e9ecef;
+        }
+
+        .folder {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .folder:hover {
+            background-color: #e3f2fd;
+        }
+
+        .folder-icon {
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .file-icon {
+            color: #95a5a6;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+
+        .indent-1 { margin-left: 20px; }
+        .indent-2 { margin-left: 40px; }
+        .indent-3 { margin-left: 60px; }
+
+        .success-message {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .info-box {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Organizador Académico SENA</h1>
+            <p>Análisis y Desarrollo de Software - Ficha 3070388</p>
+        </div>
+
+        <div class="info-box">
+            <strong>📁 Estructura Profesional de Carpetas</strong><br>
+            Organización completa basada en competencias SENA y mejores prácticas del desarrollo de software
+        </div>
+
+        <button class="generate-btn" onclick="generateStructure()">
+            🎯 Generar Estructura de Carpetas
+        </button>
+
+        <div class="structure-preview" id="structurePreview" style="display: none;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">📂 Vista Previa de la Estructura:</h3>
+            <div id="folderStructure"></div>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <h3>✅ ¡Estructura Generada Exitosamente!</h3>
+            <p>Scripts de creación de carpetas generados. Descarga e ejecuta según tu sistema operativo.</p>
+            <div class="download-links">
+                <button class="download-btn" onclick="downloadBatchScript()">🪟 Windows (.bat)</button>
+                <button class="download-btn" onclick="downloadShellScript()">🐧 Linux/Mac (.sh)</button>
+                <button class="download-btn" onclick="downloadPowerShell()">⚡ PowerShell (.ps1)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const folderStructure = {
+            "📚 SENA_ADS_Portafolio_Academico_3070388": {
+                "🎓 01_Portafolio_Educativo": {
+                    "📋 Competencias_SENA": {
+                        "🔧 220501094_Estructurar_Propuesta_Tecnica": {
+                            "📄 Evidencias_Conocimiento": ["eval_*.pdf", "quiz_*.pdf", "examenes_*.pdf"],
+                            "🛠️ Evidencias_Desempeño": ["proyecto_*.zip", "simulacion_*.docx"],
+                            "📦 Evidencias_Producto": ["propuesta_tecnica_*.pdf", "documento_requisitos_*.docx"]
+                        },
+                        "💻 220501096_Desarrollar_Solucion_Software": {
+                            "📄 Evidencias_Conocimiento": ["eval_desarrollo_*.pdf", "conceptos_*.pdf"],
+                            "🛠️ Evidencias_Desempeño": ["codigo_fuente_*.zip", "metodologias_*.docx"],
+                            "📦 Evidencias_Producto": ["aplicacion_*.zip", "documentacion_tecnica_*.pdf"]
+                        },
+                        "🔍 Analisis_Requisitos": {
+                            "📄 Evidencias_Conocimiento": ["eval_analisis_*.pdf"],
+                            "🛠️ Evidencias_Desempeño": ["casos_uso_*.docx", "entrevistas_*.mp4"],
+                            "📦 Evidencias_Producto": ["informe_requisitos_*.pdf", "matrices_trazabilidad_*.xlsx"]
+                        },
+                        "🎨 Modelado_Funciones": {
+                            "📄 Evidencias_Conocimiento": ["eval_modelado_*.pdf"],
+                            "🛠️ Evidencias_Desempeño": ["diagramas_*.drawio", "modelos_*.vpp"],
+                            "📦 Evidencias_Producto": ["documentacion_modelos_*.pdf"]
+                        }
+                    },
+                    "📑 Proyectos_Formativos": {
+                        "🏢 Proyecto_1_Sistema_Gestion": ["analisis_*.pdf", "diseño_*.drawio", "codigo_*.zip"],
+                        "🌐 Proyecto_2_Aplicacion_Web": ["frontend_*.zip", "backend_*.zip", "bd_*.sql"],
+                        "📱 Proyecto_3_App_Movil": ["android_*.zip", "ios_*.zip", "documentacion_*.pdf"]
+                    },
+                    "📚 Recursos_Estudio": {
+                        "📖 Bibliografia": ["libros_*.pdf", "articulos_*.pdf"],
+                        "🎥 Videos_Tutoriales": ["enlaces_youtube.txt", "videos_offline_*.mp4"],
+                        "🔗 Enlaces_Web": ["bookmarks_desarrollo.html", "recursos_online.txt"]
+                    }
+                },
+                "💼 02_Portafolio_Laboral": {
+                    "🚀 Proyectos_Personales": {
+                        "💻 Desarrollo_Web": ["portfolio_web_*.zip", "ecommerce_*.zip"],
+                        "📱 Apps_Moviles": ["app_1_*.zip", "app_2_*.zip"],
+                        "🤖 Automatizacion": ["scripts_*.py", "bots_*.js"]
+                    },
+                    "🏆 Certificaciones": {
+                        "🎓 SENA": ["certificado_tecnólogo_*.pdf"],
+                        "☁️ Cloud": ["aws_*.pdf", "azure_*.pdf", "gcp_*.pdf"],
+                        "💻 Desarrollo": ["oracle_*.pdf", "microsoft_*.pdf", "google_*.pdf"]
+                    },
+                    "📄 Documentos_Profesionales": {
+                        "📝 CV_Hoja_Vida": ["cv_es_*.pdf", "cv_en_*.pdf"],
+                        "💌 Cartas_Presentacion": ["carta_*.docx"],
+                        "🎯 Perfiles_Profesionales": ["linkedin_profile.txt", "github_profile.txt"]
+                    }
+                },
+                "🔗 03_Enlaces_Importantes": {
+                    "🌐 Sitios_Web_Personales": ["mi_portfolio.url", "blog_personal.url"],
+                    "💻 Repositorios": ["github_principal.url", "gitlab_proyectos.url"],
+                    "📚 Plataformas_Estudio": ["platzi.url", "coursera.url", "udemy.url"],
+                    "🏢 Redes_Profesionales": ["linkedin.url", "stackoverflow.url"]
+                },
+                "🛠️ 04_Herramientas_Desarrollo": {
+                    "⚙️ Configuraciones": {
+                        "🎨 VS_Code": ["settings.json", "extensions.txt"],
+                        "🗃️ Git": ["gitconfig.txt", "ssh_keys_backup.txt"],
+                        "🐳 Docker": ["dockerfiles_*.dockerfile", "docker-compose_*.yml"]
+                    },
+                    "📦 Plantillas_Codigo": {
+                        "🌐 Web": ["template_html.zip", "template_react.zip"],
+                        "📱 Mobile": ["template_flutter.zip", "template_react_native.zip"],
+                        "🔧 Backend": ["template_node.zip", "template_python.zip"]
+                    }
+                },
+                "📊 05_Gestion_Archivos": {
+                    "📁 Organizacion": {
+                        "🗂️ Por_Tipo": {
+                            "📄 Documentos": ["*.pdf", "*.docx", "*.txt"],
+                            "🖼️ Imagenes": ["*.jpg", "*.png", "*.svg"],
+                            "🎥 Videos": ["*.mp4", "*.avi", "*.mov"],
+                            "💾 Codigo": ["*.html", "*.css", "*.js", "*.py", "*.java"],
+                            "🗃️ Bases_Datos": ["*.sql", "*.db", "*.json"],
+                            "📦 Archivos": ["*.zip", "*.rar", "*.7z"]
+                        }
+                    },
+                    "🔍 Indices": ["indice_general.xlsx", "registro_actividades.docx"],
+                    "⏰ Cronogramas": ["cronograma_semestral.pdf", "plan_estudio.xlsx"]
+                }
+            }
+        };
+
+        function generateStructure() {
+            const preview = document.getElementById('structurePreview');
+            const folderDiv = document.getElementById('folderStructure');
+            const successMsg = document.getElementById('successMessage');
+            
+            folderDiv.innerHTML = '';
+            displayStructure(folderStructure, folderDiv, 0);
+            
+            preview.style.display = 'block';
+            successMsg.style.display = 'block';
+        }
+
+        function displayStructure(obj, container, level) {
+            for (const [key, value] of Object.entries(obj)) {
+                const div = document.createElement('div');
+                div.className = `folder indent-${level}`;
+                
+                if (typeof value === 'object' && !Array.isArray(value)) {
+                    div.innerHTML = `<span class="folder-icon">📁</span><strong>${key}</strong>`;
+                    container.appendChild(div);
+                    displayStructure(value, container, level + 1);
+                } else if (Array.isArray(value)) {
+                    div.innerHTML = `<span class="folder-icon">📁</span><strong>${key}</strong>`;
+                    container.appendChild(div);
+                    value.forEach(file => {
+                        const fileDiv = document.createElement('div');
+                        fileDiv.className = `folder indent-${level + 1}`;
+                        fileDiv.innerHTML = `<span class="file-icon">📄</span>${file}`;
+                        container.appendChild(fileDiv);
+                    });
+                } else {
+                    div.innerHTML = `<span class="file-icon">📄</span>${key}`;
+                    container.appendChild(div);
+                }
+            }
+        }
+
+        function generateBatchScript() {
+            let script = '@echo off\n';
+            script += 'echo Creando estructura de carpetas SENA - Analisis y Desarrollo de Software\n';
+            script += 'echo Ficha: 3070388\n';
+            script += 'echo.\n\n';
+            
+            function addFolders(obj, path = '') {
+                for (const [key, value] of Object.entries(obj)) {
+                    const cleanKey = key.replace(/[🚀📚🎓💼🔗🛠️📊📋🔧💻🔍🎨📑🏢🌐📱📚📖🎥🔗💻📱🤖🏆🎓☁️💻📄📝💌🎯🌐💻📚🏢⚙️🎨🗃️🐳📦🌐📱🔧📁🗂️📄🖼️🎥💾🗃️📦🔍⏰]/g, '').trim().replace(/\s+/g, '_');
+                    const newPath = path ? `${path}\\${cleanKey}` : cleanKey;
+                    
+                    if (typeof value === 'object' && !Array.isArray(value)) {
+                        script += `mkdir "${newPath}" 2>nul\n`;
+                        addFolders(value, newPath);
+                    } else if (Array.isArray(value)) {
+                        script += `mkdir "${newPath}" 2>nul\n`;
+                        value.forEach(file => {
+                            const cleanFile = file.replace(/[📄🛠️📦🖼️🎥💾🗃️]/g, '').trim();
+                            script += `echo. > "${newPath}\\${cleanFile.replace('*', 'ejemplo')}"\n`;
+                        });
+                    }
+                }
+            }
+            
+            addFolders(folderStructure);
+            script += '\necho.\necho ✅ Estructura creada exitosamente!\necho Presiona cualquier tecla para continuar...\npause >nul\n';
+            return script;
+        }
+
+        function generateShellScript() {
+            let script = '#!/bin/bash\n\n';
+            script += 'echo "Creando estructura de carpetas SENA - Análisis y Desarrollo de Software"\n';
+            script += 'echo "Ficha: 3070388"\n';
+            script += 'echo ""\n\n';
+            
+            function addFolders(obj, path = '') {
+                for (const [key, value] of Object.entries(obj)) {
+                    const cleanKey = key.replace(/[🚀📚🎓💼🔗🛠️📊📋🔧💻🔍🎨📑🏢🌐📱📚📖🎥🔗💻📱🤖🏆🎓☁️💻📄📝💌🎯🌐💻📚🏢⚙️🎨🗃️🐳📦🌐📱🔧📁🗂️📄🖼️🎥💾🗃️📦🔍⏰]/g, '').trim().replace(/\s+/g, '_');
+                    const newPath = path ? `${path}/${cleanKey}` : cleanKey;
+                    
+                    if (typeof value === 'object' && !Array.isArray(value)) {
+                        script += `mkdir -p "${newPath}"\n`;
+                        addFolders(value, newPath);
+                    } else if (Array.isArray(value)) {
+                        script += `mkdir -p "${newPath}"\n`;
+                        value.forEach(file => {
+                            const cleanFile = file.replace(/[📄🛠️📦🖼️🎥💾🗃️]/g, '').trim();
+                            script += `touch "${newPath}/${cleanFile.replace('*', 'ejemplo')}"\n`;
+                        });
+                    }
+                }
+            }
+            
+            addFolders(folderStructure);
+            script += '\necho ""\necho "✅ Estructura creada exitosamente!"\nread -p "Presiona Enter para continuar..."\n';
+            return script;
+        }
+
+        function generatePowerShell() {
+            let script = '# Script PowerShell para crear estructura SENA\n';
+            script += 'Write-Host "Creando estructura de carpetas SENA - Análisis y Desarrollo de Software" -ForegroundColor Green\n';
+            script += 'Write-Host "Ficha: 3070388" -ForegroundColor Yellow\n';
+            script += 'Write-Host ""\n\n';
+            
+            function addFolders(obj, path = '') {
+                for (const [key, value] of Object.entries(obj)) {
+                    const cleanKey = key.replace(/[🚀📚🎓💼🔗🛠️📊📋🔧💻🔍🎨📑🏢🌐📱📚📖🎥🔗💻📱🤖🏆🎓☁️💻📄📝💌🎯🌐💻📚🏢⚙️🎨🗃️🐳📦🌐📱🔧📁🗂️📄🖼️🎥💾🗃️📦🔍⏰]/g, '').trim().replace(/\s+/g, '_');
+                    const newPath = path ? `${path}\\${cleanKey}` : cleanKey;
+                    
+                    if (typeof value === 'object' && !Array.isArray(value)) {
+                        script += `New-Item -ItemType Directory -Path "${newPath}" -Force | Out-Null\n`;
+                        addFolders(value, newPath);
+                    } else if (Array.isArray(value)) {
+                        script += `New-Item -ItemType Directory -Path "${newPath}" -Force | Out-Null\n`;
+                        value.forEach(file => {
+                            const cleanFile = file.replace(/[📄🛠️📦🖼️🎥💾🗃️]/g, '').trim();
+                            script += `New-Item -ItemType File -Path "${newPath}\\${cleanFile.replace('*', 'ejemplo')}" -Force | Out-Null\n`;
+                        });
+                    }
+                }
+            }
+            
+            addFolders(folderStructure);
+            script += '\nWrite-Host ""\nWrite-Host "✅ Estructura creada exitosamente!" -ForegroundColor Green\nRead-Host "Presiona Enter para continuar..."\n';
+            return script;
+        }
+
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type: type });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function downloadBatchScript() {
+            const script = generateBatchScript();
+            downloadFile(script, 'crear_estructura_sena_ads.bat', 'text/plain');
+        }
+
+        function downloadShellScript() {
+            const script = generateShellScript();
+            downloadFile(script, 'crear_estructura_sena_ads.sh', 'text/plain');
+        }
+
+        function downloadPowerShell() {
+            const script = generatePowerShell();
+            downloadFile(script, 'crear_estructura_sena_ads.ps1', 'text/plain');
+        }
+    </script>
+</body>
+</html>
